@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./PianoBody.css"
 import * as Tone from 'tone';
 
@@ -6,6 +7,24 @@ function PianoBody() {
         const synth = new Tone.Synth().toDestination();
         synth.triggerAttackRelease(note, "8n");
     };
+
+    const keyMap = {
+        "a":"C4", "w":"C#4", "s":"D4", "e":"D#4", "d":"E4", "f":"F4", "t":"F#4", "g":"G4", "y":"G#4", "h":"A4", "u":"A#4", "j":"B4", "k":"C5", "o":"C#5", "l":"D5", "p":"D#5", ";":"E5"
+    };
+
+    const keyNote = (event) => {
+        const note = keyMap[event.key];
+        if (note){
+            playNote(note);
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener("keydown", keyNote);
+        return () => {
+            window.removeEventListener("keydown", keyNote);
+        };
+    },[]);
 
     return (
       <div className="PianoBody">  
