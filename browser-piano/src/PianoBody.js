@@ -1,5 +1,5 @@
 import "./PianoBody.css"
-
+import * as Tone from 'tone';
 
 function PianoBody() {
     return (
