@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import logo from './logo.jpg';
 import './App.css';
+import "./PianoBody"
+import PianoBody from './PianoBody';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="App">  
+
+    
+        
+         <div className = "navigation-bar">
+               <img src = {logo} alt = "piano-logo" className = "piano-logo" />  
+          </div>               
+
+
+        
+       
+
+
+
+
+
+        <PianoBody/>
+
+      </div>
+
+      
   );
 }
 
