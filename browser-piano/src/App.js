@@ -3,7 +3,6 @@ import './App.css';
 import Home from "./pages/home";
 import "./PianoBody"
 import PianoBody from './PianoBody';
-import * as Tone from 'tone';
 
 function App() {
   return (
