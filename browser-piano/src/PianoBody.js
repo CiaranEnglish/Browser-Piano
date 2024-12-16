@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import "./PianoBody.css";
 import * as Tone from 'tone';
 import { Piano } from '@tonejs/piano';
-import ChangeThemes from "./changethemes";
 
 function PianoBody({ theme }) {
     const [instrument, setInstrument] = useState(null);
 
     useEffect(() => {
         let newInstrument;
-
         if (theme === "Default") {
             newInstrument = new Piano({ velocities: 5 }).toDestination();
         } else if (theme === "Christmas") {
@@ -23,7 +21,6 @@ function PianoBody({ theme }) {
         if (newInstrument instanceof Piano) {
             newInstrument.load().then(() => {
                 setInstrument(newInstrument);
-                console.log(`${theme} samples loaded!`);
             });
         } else {
             setInstrument(newInstrument);
@@ -34,7 +31,7 @@ function PianoBody({ theme }) {
         if (instrument) {
             if (instrument instanceof Piano) {
                 instrument.keyDown({ note, velocity: 0.8 });
-                setTimeout(() => instrument.keyUp({ note }), 500);
+                setTimeout(() => instrument.keyUp({ note }), 300);
             } 
             else {
                 instrument.triggerAttackRelease(note, "8n");
@@ -60,7 +57,7 @@ function PianoBody({ theme }) {
         return () => {
             window.removeEventListener("keydown", keyNote);
         };
-    }, []);
+    }, [instrument]);
 
     return (
         <div className="PianoBody">
