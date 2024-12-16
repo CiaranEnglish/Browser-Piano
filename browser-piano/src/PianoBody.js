@@ -4,22 +4,41 @@ import * as Tone from 'tone';
 import { Piano } from '@tonejs/piano';
 import ChangeThemes from "./changethemes";
 
-function PianoBody() {
-    const [piano, setPiano] = useState(null);
+function PianoBody({ theme }) {
+    const [instrument, setInstrument] = useState(null);
 
     useEffect(() => {
-        //const synth = new Tone.Synth().toDestination();
-        const piano = new Piano({velocities: 5}).toDestination();
+        let newInstrument;
 
-        piano.load().then(() => {
-            setPiano(piano);
-        });
-    }, []);
+        if (theme === "Default") {
+            newInstrument = new Piano({ velocities: 5 }).toDestination();
+        } else if (theme === "Christmas") {
+            newInstrument = new Tone.Synth().toDestination();
+        } else if (theme === "Halloween") {
+            newInstrument = new Tone.MembraneSynth().toDestination();
+        } else if (theme === "Techno") {
+            newInstrument = new Tone.DuoSynth().toDestination();
+        }
+
+        if (newInstrument instanceof Piano) {
+            newInstrument.load().then(() => {
+                setInstrument(newInstrument);
+                console.log(`${theme} samples loaded!`);
+            });
+        } else {
+            setInstrument(newInstrument);
+        }
+    }, [theme]);
 
     const playNote = (note) => {
-        if (piano) {
-            piano.keyDown({ note, velocity: 0.8 });
-            setTimeout(() => piano.keyUp({ note }),300);
+        if (instrument) {
+            if (instrument instanceof Piano) {
+                instrument.keyDown({ note, velocity: 0.8 });
+                setTimeout(() => instrument.keyUp({ note }), 500);
+            } 
+            else {
+                instrument.triggerAttackRelease(note, "8n");
+            }
         }
     };
 

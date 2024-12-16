@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './changethemes.css'; // Ensure this file handles your general styles
+import './changethemes.css'; 
 import DefaultImage from "./default.jpg";
 import ChristmasImage from "./christmas.jpg";
 import HalloweenImage from "./halloween.jpg";
 import TechnoImage from "./techno.jpg";
 
-const ChangeThemes = () => {
+const ChangeThemes = ({ currentTheme, themeChange }) => {
   // State to control dropdown and theme
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(DefaultImage); // Replace with a default background
@@ -22,6 +22,7 @@ const ChangeThemes = () => {
   const handleThemeChange = (theme) => {
     setBackgroundImage(themes[theme]);
     setDropdownOpen(false); // Close dropdown after selection
+    themeChange(theme);
   };
 
   return (
