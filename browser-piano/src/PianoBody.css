@@ -1,15 +1,15 @@
 .PianoBody
 {
     display: flex;
-    position: relative;
+    position: absolute;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     
+    
     width: 100%;
     height: 100vh;
     user-select: none;
-    background-image: url(./background1.jpeg);
 
 
 }
@@ -25,7 +25,7 @@
     text-transform: uppercase;
     list-style:none;
     background:linear-gradient(rgb(0, 0, 0),rgb(40, 0, 93));
-    width: 50%;
+    width: 70vw;
     height: 40vh;
     border-radius: 1rem;
     padding: 3rem 3rem;
@@ -34,6 +34,7 @@
     outline-color: white;
     outline-style: solid;
     position: relative;
+    z-index: 1;
 }
 
 
@@ -49,6 +50,7 @@
     outline-style: solid;
     border-radius: 0.5rem;
     cursor: pointer;
+    z-index: 2;
 }
 
 
@@ -67,7 +69,7 @@
     position: relative;
     width: 4.5%;
     height: 40%;
-    z-index: 2;
+    z-index: 3;
     margin: 0 -2.1% 0 -2.1%;
     background:linear-gradient(#333, black);
     outline-width: 0.2rem;
