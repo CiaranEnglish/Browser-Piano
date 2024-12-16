@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tonejs/piano": "^0.2.1",
     "chromedriver": "^130.0.1",
     "firebase": "^11.1.0",
     "geckodriver": "^4.5.1",
