@@ -5,6 +5,9 @@ import Home from "./pages/home";
 import "./PianoBody"
 import PianoBody from './PianoBody';
 import ChangeThemes from './changethemes';
+import SignUpForm from './SignUpForm';
+import Login from './Login';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   const [theme, setTheme] = useState("Default");
@@ -14,9 +17,15 @@ function App() {
                <img src = {logo} alt = "piano-logo" className = "piano-logo" />  
           </div>        
        
-          <PianoBody theme={theme}/>
           <ChangeThemes currentTheme={theme} themeChange={setTheme}/>
-        <Home/>
+          
+          <BrowserRouter>
+            <Routes>
+              <Route path='/home' element={<PianoBody theme={theme}/>}></Route>
+              <Route path='/signup' element={<SignUpForm />}></Route>
+              <Route path='/login' element={<Login />}></Route>
+            </Routes>
+          </BrowserRouter>
       </div>  
   );
 }
