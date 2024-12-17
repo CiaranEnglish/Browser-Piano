@@ -17,11 +17,11 @@ function App() {
                <img src = {logo} alt = "piano-logo" className = "piano-logo" />  
           </div>        
        
+          <PianoBody theme={theme}/>
           <ChangeThemes currentTheme={theme} themeChange={setTheme}/>
           
           <BrowserRouter>
             <Routes>
-              <Route path='/home' element={<PianoBody theme={theme}/>}></Route>
               <Route path='/signup' element={<SignUpForm />}></Route>
               <Route path='/login' element={<Login />}></Route>
             </Routes>

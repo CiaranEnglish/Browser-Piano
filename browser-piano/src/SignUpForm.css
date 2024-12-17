@@ -23,7 +23,7 @@
 }
 
 .signup-form h2 {
-    color: #4c00fd;
+    color: rgb(111, 0, 255);
 }
 
 .signup-form label {
@@ -42,7 +42,7 @@
 }
 
 .signup-form button {
-    background-color: #4c00fd;
+    background-color: rgb(111, 0, 255);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -52,5 +52,5 @@
 }
 
 .signup form button:hover {
-    background-color: #5115dd;
+    background-color: rgb(57, 4, 126);
 }
