@@ -5,6 +5,16 @@ import { Piano } from '@tonejs/piano';
 
 function PianoBody({ theme }) {
     const [instrument, setInstrument] = useState(null);
+    const [effects, setEffects] = useState({
+        reverb: false,
+        delay: false,
+        compression: false,
+    });
+
+    // Effects 
+    const reverb = new Tone.Reverb({ decay: 2, wet: 0.5 }).toDestination();
+    const delay = new Tone.FeedbackDelay({ delayTime: "8n", feedback: 0.5, wet: 0.5 }).toDestination();
+    const compressor = new Tone.Compressor(-30, 3).toDestination();
 
     useEffect(() => {
         let newInstrument;
@@ -27,6 +37,20 @@ function PianoBody({ theme }) {
         }
     }, [theme]);
 
+    useEffect(() => {
+        if (!instrument) return;
+
+        // Remove all effects if page resets
+        instrument.disconnect();
+
+        // Apply toggled effects
+        if (effects.reverb) instrument.connect(reverb);
+        if (effects.delay) instrument.connect(delay);
+        if (effects.compression) instrument.connect(compressor);
+
+        instrument.connect(Tone.getDestination());
+    }, [effects, instrument]);
+
     const playNote = (note) => {
         if (instrument) {
             if (instrument instanceof Piano) {
@@ -37,6 +61,13 @@ function PianoBody({ theme }) {
                 instrument.triggerAttackRelease(note, "8n");
             }
         }
+    };
+
+    const toggleEffect = (effect) => {
+        setEffects((prev) => ({
+            ...prev,
+            [effect]: !prev[effect],
+        }));
     };
 
     const keyMap = {
@@ -61,6 +92,17 @@ function PianoBody({ theme }) {
 
     return (
         <div className="PianoBody">
+            <div className="controls">
+                <button onClick={() => toggleEffect("reverb")}>
+                    {effects.reverb ? "Disable Reverb" : "Enable Reverb"}
+                </button>
+                <button onClick={() => toggleEffect("delay")}>
+                    {effects.delay ? "Disable Delay" : "Enable Delay"}
+                </button>
+                <button onClick={() => toggleEffect("compression")}>
+                    {effects.compression ? "Disable Compression" : "Enable Compression"}
+                </button>
+            </div>
             <ul className="piano-keys">
                 <li className="key white" onClick={() => playNote('C3')}><span>1</span></li>
                 <li className="key black" onClick={() => playNote('C#3')}><span>2</span></li>
