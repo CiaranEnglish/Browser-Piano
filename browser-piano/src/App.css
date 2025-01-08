@@ -42,3 +42,17 @@ a
   margin-left: 3%;
   
 }
+
+.login-button {
+  position: absolute;
+  right: 30px;
+  padding: 10px 20px;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+}

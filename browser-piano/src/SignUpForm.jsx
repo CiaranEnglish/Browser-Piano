@@ -14,7 +14,7 @@ const SignUpForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
-            await app.auth().createUserWithEmailAndPassword(auth, email, password)
+            await createUserWithEmailAndPassword(auth, email, password)
             console.log("Account Created")
         } catch(err) {
             console.log(err)
@@ -23,6 +23,8 @@ const SignUpForm = () => {
 
   return (
     <div className='signup-container'>
+        <Link to="/App" className="back-button">Back</Link>
+
         <form className='signup-form' onSubmit={handleSubmit}>
             <h2>Sign Up</h2>
             <label htmlFor="email">
