@@ -14,7 +14,7 @@ const SignUpForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try{
-            await createUserWithEmailAndPassword(auth, email, password)
+            createUserWithEmailAndPassword(auth, email, password)
             console.log("Account Created")
         } catch(err) {
             console.log(err)
