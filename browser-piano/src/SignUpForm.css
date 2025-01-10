@@ -23,7 +23,7 @@
 }
 
 .signup-form h2 {
-    color: #4c00fd;
+    color: rgb(111, 0, 255);
 }
 
 .signup-form label {
@@ -42,7 +42,7 @@
 }
 
 .signup-form button {
-    background-color: #4c00fd;
+    background-color: rgb(111, 0, 255);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -51,6 +51,22 @@
     font-size: 16px;
 }
 
-.signup form button:hover {
-    background-color: #5115dd;
+.signup-form button:hover {
+    background-color: rgb(57, 4, 126);
+}
+
+.back-button{
+    font-size: 16px;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+    font-weight: bold;
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    z-index: 1000;
+    background-color:white;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
 }

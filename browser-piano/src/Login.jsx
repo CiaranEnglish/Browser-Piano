@@ -22,6 +22,8 @@ const Login = () => {
 
   return (
     <div className='signup-container'>
+        <Link to="/App" className="back-button">Back</Link>
+
         <form className='signup-form' onSubmit={handleSubmit}>
             <h2>Login</h2>
             <label htmlFor="email">
