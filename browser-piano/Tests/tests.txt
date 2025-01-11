@@ -23,32 +23,32 @@ async function runTest() {
         await driver.findElement(By.css('a[href="/home"]')).click();
         await driver.wait(until.urlIs('http://localhost:3000/home'), 1000);
 
-        console.log('Test to navigate to piano passed');
+        console.log('Test open piano passed');
 
         // Test changing theme
         await driver.findElement(By.css('button')).click(); // Open dropdown
         const themeOption = await driver.findElement(By.xpath("//li[contains(text(),'Christmas')]"));
         await themeOption.click();
-        console.log('Test to change theme passed');
+        console.log('Test change theme passed');
 
         // Test toggling effects
         const reverbButton = await driver.findElement(By.xpath("//button[contains(text(),'Enable Reverb')]"));
         await reverbButton.click();
-        console.log('Test if reverb enabled passed');
+        console.log('Test effect enabled passed');
 
         // Test playing a note 
         await driver.actions().sendKeys('a').perform(); // Simulate pressing "a"
-        console.log('Test for key press passed');
+        console.log('Test piano key passed');
 
         // Open signup page
         await driver.findElement(By.css('a[href="/signup"]')).click();
         await driver.wait(until.urlIs('http://localhost:3000/signup'), 1000);
-        console.log('Test to signup page passed');
+        console.log('Test signup page passed');
 
         // Go back to piano 
         await driver.findElement(By.css('a[href="/home"]')).click();
         await driver.wait(until.urlIs('http://localhost:3000/home'), 1000);
-        console.log('Test to piano page passed');
+        console.log('Test open piano passed');
 
     } catch (error) {
         console.error('Test failed:', error);
