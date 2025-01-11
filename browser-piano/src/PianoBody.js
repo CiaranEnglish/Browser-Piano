@@ -3,8 +3,10 @@ import "./PianoBody.css";
 import * as Tone from 'tone';
 import { Piano } from '@tonejs/piano';
 
+// Function to define the piano functionality including themes and effects
 function PianoBody({ theme }) {
     const [instrument, setInstrument] = useState(null);
+    // Disable all effects on startup 
     const [effects, setEffects] = useState({
         reverb: false,
         delay: false,
@@ -18,6 +20,7 @@ function PianoBody({ theme }) {
 
     useEffect(() => {
         let newInstrument;
+        // Depending on the current theme, create a new instance of piano with the defined sounds
         if (theme === "Default") {
             newInstrument = new Piano({ velocities: 5 }).toDestination();
         } else if (theme === "Christmas") {
@@ -28,6 +31,7 @@ function PianoBody({ theme }) {
             newInstrument = new Tone.DuoSynth().toDestination();
         }
 
+        // Load piano instance corresponding to the current theme
         if (newInstrument instanceof Piano) {
             newInstrument.load().then(() => {
                 setInstrument(newInstrument);
@@ -43,7 +47,7 @@ function PianoBody({ theme }) {
         // Remove all effects if page resets
         instrument.disconnect();
 
-        // Apply toggled effects
+        // Apply effects if toggled on by button
         if (effects.reverb) instrument.connect(reverb);
         if (effects.delay) instrument.connect(delay);
         if (effects.compression) instrument.connect(compressor);
@@ -51,47 +55,61 @@ function PianoBody({ theme }) {
         instrument.connect(Tone.getDestination());
     }, [effects, instrument]);
 
+    // Function to play note
     const playNote = (note) => {
         if (instrument) {
             if (instrument instanceof Piano) {
+                // If piano is available play note with defined velocity
                 instrument.keyDown({ note, velocity: 0.8 });
+                // RElease note after set time
                 setTimeout(() => instrument.keyUp({ note }), 300);
             } 
             else {
+                // Play with duration of an eighth note ("8n")
                 instrument.triggerAttackRelease(note, "8n");
             }
         }
     };
 
+    // Function to handle effects
     const toggleEffect = (effect) => {
         setEffects((prev) => ({
+            // Keep all existing effects (ensures effects can be layered)
             ...prev,
+            // Set effect value to opposite of previous value to turn on/off
             [effect]: !prev[effect],
         }));
     };
 
+    // Map to assign computer keys to specific notes on the piano
     const keyMap = {
         "1": "C3", "2": "C#3", "3": "D3", "4": "D#3", "5": "E3", "6": "F3", "7": "F#3", "8": "G3", "9": "G#3", "0": "A3", "-": "A#3", "=": "B3", 
         "a": "C4", "w": "C#4", "s": "D4", "e": "D#4", "d": "E4", "f": "F4", "t": "F#4", "g": "G4", "y": "G#4", "h": "A4", "u": "A#4", "j": "B4", 
         "k": "C5", "o": "C#5", "l": "D5", "p": "D#5", ";": "E5"
     };
 
+    // Function to handle playing with keyboard
     const keyNote = (event) => {
+        // Find note associated with pressed key
         const note = keyMap[event.key];
+        // If note found for key then play
         if (note) {
             playNote(note);
         }
     };
 
     useEffect(() => {
+        // Listen for keypress 
         window.addEventListener("keydown", keyNote);
         return () => {
+            // Remove if intstrument changes
             window.removeEventListener("keydown", keyNote);
         };
     }, [instrument]);
 
     return (
         <div className="PianoBody">
+            {/* Buttons to toggle effects on/off */}
             <div className="controls">
                 <button onClick={() => toggleEffect("reverb")}>
                     {effects.reverb ? "Disable Reverb" : "Enable Reverb"}
@@ -103,6 +121,7 @@ function PianoBody({ theme }) {
                     {effects.compression ? "Disable Compression" : "Enable Compression"}
                 </button>
             </div>
+            {/* Notes and defintions for each piano key */}
             <ul className="piano-keys">
                 <li className="key white" onClick={() => playNote('C3')}><span>1</span></li>
                 <li className="key black" onClick={() => playNote('C#3')}><span>2</span></li>
