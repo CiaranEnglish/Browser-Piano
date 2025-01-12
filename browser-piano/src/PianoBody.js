@@ -1,3 +1,7 @@
+/* References:
+https://tonejs.github.io/
+https://github.com/Tonejs/Tone.js
+*/
 import { useEffect, useState } from "react";
 import "./PianoBody.css";
 import * as Tone from 'tone';
