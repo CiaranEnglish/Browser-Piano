@@ -7,6 +7,8 @@ import { app } from './firebase.js'
 import { auth } from './firebase'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
+
+// Sets up Sign up form parameters, Email and Password
 const SignUpForm = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -21,6 +23,10 @@ const SignUpForm = () => {
         }
     }
 
+
+// Sets up input for Email and Password
+// includes link back to piano page on line 32
+// includes link to login page on line 45
   return (
     <div className='signup-container'>
         <Link to="/App" className="back-button">Back</Link>

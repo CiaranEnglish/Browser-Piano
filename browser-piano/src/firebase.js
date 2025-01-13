@@ -5,6 +5,7 @@ import { Auth } from 'firebase/app'
 import { getAuth} from 'firebase/auth'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
+//  Connects to firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCK4FWNVWVS0ZwQlttLhryrTZoChfMEPWU",
   authDomain: "cs322-browser-instrument.firebaseapp.com",
